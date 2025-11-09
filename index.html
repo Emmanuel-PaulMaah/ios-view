@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AR Quick Look • iOS</title>
+  <style>
+    html,body {margin:0;height:100%;}
+    .wrap {display:grid;place-items:center;height:100%;font:16px system-ui,sans-serif}
+    .hint {opacity:.7;margin-top:.5rem}
+  </style>
+  <!-- model-viewer runtime -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Inline 3D preview on all browsers -->
+    <model-viewer id="mv"
+      src="assets/model.usdz"               <!-- shows inline if Safari supports USDZ, else ignored -->
+      ios-src="assets/model.usdz"           <!-- AR Quick Look payload -->
+      ar ar-modes="quick-look"              <!-- iOS-only AR -->
+      ar-scale="fixed"                      <!-- keep real-world size -->
+      poster="assets/preview.jpg"           <!-- optional -->
+      camera-controls                        <!-- orbit in-page -->
+      style="width:min(100vw,600px);height:min(100vh,80vh);background:#000">
+      <!-- Built-in AR button appears on iOS Safari -->
+      <button slot="ar-button" style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%);padding:12px 16px">
+        View in AR
+      </button>
+    </model-viewer>
+
+    <!-- Hard fallback that always works on iOS Safari -->
+    <p class="hint">
+      If the button doesn’t show, <a rel="ar" href="assets/model_avatar.usdz">open AR directly</a>.
+    </p>
+  </div>
+</body>
+</html>
